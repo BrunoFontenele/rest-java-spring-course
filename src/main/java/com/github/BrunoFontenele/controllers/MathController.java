@@ -55,6 +55,15 @@ public class MathController {
         return convertToDouble(numberOne) / convertToDouble(numberTwo);
     }
 
+    //http://localhost:8080/math/mean/3/5
+    @RequestMapping("/mean/{numberOne}/{numberTwo}")
+    public Double mean(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ){
+        return sum(numberOne, numberTwo)/2;
+    }
+
 
 
     //AUXILIARY
