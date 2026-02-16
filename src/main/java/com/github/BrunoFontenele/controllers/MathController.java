@@ -20,6 +20,19 @@ public class MathController {
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
+    //http://localhost:8080/math/subtraction/3/5
+    @RequestMapping("/subtraction/{numberOne}/{numberTwo}")
+    public Double subtraction(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ){
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+    }
+
+    //AUXILIARY
+
     private Double convertToDouble(String strNumber) {
 
         if(strNumber == null || strNumber.isEmpty())
