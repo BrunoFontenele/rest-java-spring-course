@@ -22,7 +22,9 @@ public class MathController {
         return 1D;
     }
 
-    private boolean isNumeric(String numberOne) {
-        return true;
+    private boolean isNumeric(String strNumber) {
+        if(strNumber == null || strNumber.isEmpty()) return false;
+        String number = strNumber.replace(",", "."); //some currencies use comma
+        return number.matches("[-+]?[0-9]*\\.?[0-9]+");
     }
 }
