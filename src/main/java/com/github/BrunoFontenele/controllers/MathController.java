@@ -64,6 +64,21 @@ public class MathController {
         return sum(numberOne, numberTwo)/2;
     }
 
+    //http://localhost:8080/math/root/3/5
+    @RequestMapping("/root/{numberOne}/{numberTwo}")
+    public Double root(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ){
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        Double numOne =  convertToDouble(numberOne);
+        if(numOne < 0)
+            throw new UnsupportedMathOperationException("Please set a not negative radicand!");
+        if(numberTwo.equals("0"))
+            throw new UnsupportedMathOperationException("Index equals 0!");
+        return Math.pow(numOne, 1 / convertToDouble(numberTwo));
+    }
 
 
     //AUXILIARY
