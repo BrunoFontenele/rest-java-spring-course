@@ -34,6 +34,13 @@ public class PersonServices {
         return mockPerson();
     }
 
+    public Person create(Person person){
+        //mock
+        logger.info("Creating person!");
+
+        return person;
+    }
+
     private Person mockPerson(){
         //mock
         Person person = new Person();
