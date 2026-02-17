@@ -16,6 +16,8 @@ public class PersonServices {
     private Logger logger = Logger.getLogger(PersonServices.class.getName());
 
     public List<Person> findAll(){
+        logger.info("Finding all People!");
+
         List<Person> persons = new ArrayList<Person>();
 
         //mock
