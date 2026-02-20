@@ -1,6 +1,6 @@
 package com.github.BrunoFontenele.controllers;
 
-import com.github.BrunoFontenele.PersonServices;
+import com.github.BrunoFontenele.services.PersonServices;
 import com.github.BrunoFontenele.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
