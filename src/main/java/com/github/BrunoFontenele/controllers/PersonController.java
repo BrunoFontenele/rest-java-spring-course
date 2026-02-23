@@ -4,6 +4,7 @@ import com.github.BrunoFontenele.services.PersonServices;
 import com.github.BrunoFontenele.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +45,8 @@ public class PersonController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         service.delete(id);
+        return ResponseEntity.notFound().build();
     }
 }
