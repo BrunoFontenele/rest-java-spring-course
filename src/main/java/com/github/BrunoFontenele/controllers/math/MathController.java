@@ -1,12 +1,13 @@
 package com.github.BrunoFontenele.controllers.math;
 
-import com.github.BrunoFontenele.exception.UnsupportedMathOperationException;
+import com.github.BrunoFontenele.exception.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.BrunoFontenele.auxiliary.converters.Converters;
 import com.github.BrunoFontenele.auxiliary.verifications.NumberVerifications;
+import org.springframework.web.client.ResourceAccessException;
 
 @RestController
 @RequestMapping("/math")
@@ -22,7 +23,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ){
         if(!numberVerifications.isNumeric(numberOne) || !numberVerifications.isNumeric(numberTwo))
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceAccessException("Please set a numeric value!");
         return mathOperations.sum(numberConverter.convertToDouble(numberOne), numberConverter.convertToDouble(numberTwo));
     }
 
@@ -33,7 +34,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ){
         if(!numberVerifications.isNumeric(numberOne) || !numberVerifications.isNumeric(numberTwo))
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceAccessException("Please set a numeric value!");
         return mathOperations.sub(numberConverter.convertToDouble(numberOne), numberConverter.convertToDouble(numberTwo));
     }
 
@@ -44,7 +45,7 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ){
         if(!numberVerifications.isNumeric(numberOne) || !numberVerifications.isNumeric(numberTwo))
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceAccessException("Please set a numeric value!");
         return mathOperations.mul(numberConverter.convertToDouble(numberOne), numberConverter.convertToDouble(numberTwo));
     }
 
@@ -55,9 +56,9 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ){
         if(!numberVerifications.isNumeric(numberOne) || !numberVerifications.isNumeric(numberTwo))
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceAccessException("Please set a numeric value!");
         if(numberTwo.equals("0"))
-            throw new UnsupportedMathOperationException("Division by zero!");
+            throw new ResourceAccessException("Division by zero!");
         return mathOperations.div(numberConverter.convertToDouble(numberOne), numberConverter.convertToDouble(numberTwo));
     }
 
@@ -77,12 +78,12 @@ public class MathController {
             @PathVariable("numberTwo") String numberTwo
     ){
         if(!numberVerifications.isNumeric(numberOne) || !numberVerifications.isNumeric(numberTwo))
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceAccessException("Please set a numeric value!");
         Double numOne = numberConverter.convertToDouble(numberOne);
         if(numOne < 0)
-            throw new UnsupportedMathOperationException("Please set a not negative radicand!");
+            throw new ResourceAccessException("Please set a not negative radicand!");
         if(numberTwo.equals("0"))
-            throw new UnsupportedMathOperationException("Index equals 0!");
+            throw new ResourceAccessException("Index equals 0!");
         return mathOperations.root(numberConverter.convertToDouble(numberOne), numberConverter.convertToDouble(numberTwo));
     }
 }
