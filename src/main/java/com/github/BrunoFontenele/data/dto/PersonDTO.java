@@ -1,6 +1,4 @@
-package com.github.BrunoFontenele.datadto;
-
-import jakarta.persistence.*;
+package com.github.BrunoFontenele.data.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
