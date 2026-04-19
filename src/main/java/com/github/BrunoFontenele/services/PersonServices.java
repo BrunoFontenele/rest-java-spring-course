@@ -7,6 +7,7 @@ import com.github.BrunoFontenele.exception.ResourceNotFoundException;
 import static com.github.BrunoFontenele.mapper.ObjectMapper.parseListObjects;
 import static com.github.BrunoFontenele.mapper.ObjectMapper.parseObject;
 
+import com.github.BrunoFontenele.mapper.custom.PersonMapper;
 import com.github.BrunoFontenele.model.Person;
 import com.github.BrunoFontenele.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -25,6 +26,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper converter;
 
     public List<PersonDTO> findAll(){
         logger.info("Finding all People!");
@@ -47,10 +51,10 @@ public class PersonServices {
     }
 
     public PersonDTOV2 createV2(PersonDTOV2 person){
-        logger.info("Creating one person!");
-        var entity = parseObject(person, Person.class);
+        logger.info("Creating one person V2!");
+        var entity = converter.convertDTOToEntity(person);
 
-        return parseObject(repository.save(entity), PersonDTO.class);
+        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person){
