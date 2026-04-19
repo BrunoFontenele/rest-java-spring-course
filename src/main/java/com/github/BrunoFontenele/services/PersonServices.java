@@ -1,7 +1,8 @@
 package com.github.BrunoFontenele.services;
 
 import com.github.BrunoFontenele.controllers.TestLogController;
-import com.github.BrunoFontenele.data.dto.PersonDTO;
+import com.github.BrunoFontenele.data.dto.v1.PersonDTO;
+import com.github.BrunoFontenele.data.dto.v2.PersonDTOV2;
 import com.github.BrunoFontenele.exception.ResourceNotFoundException;
 import static com.github.BrunoFontenele.mapper.ObjectMapper.parseListObjects;
 import static com.github.BrunoFontenele.mapper.ObjectMapper.parseObject;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -40,6 +40,13 @@ public class PersonServices {
     }
 
     public PersonDTO create(PersonDTO person){
+        logger.info("Creating one person!");
+        var entity = parseObject(person, Person.class);
+
+        return parseObject(repository.save(entity), PersonDTO.class);
+    }
+
+    public PersonDTOV2 createV2(PersonDTOV2 person){
         logger.info("Creating one person!");
         var entity = parseObject(person, Person.class);
 
